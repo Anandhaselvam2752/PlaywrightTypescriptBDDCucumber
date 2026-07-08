@@ -9,5 +9,7 @@
     "playwright-bdd": "^9.2.0",
     "typescript": "^5.9.2"
   },
-  "scripts": {}
+  "scripts": {
+  "test:bdd": "bddgen && playwright test"
+}
 }

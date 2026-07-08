@@ -1,22 +1,18 @@
 // features/steps/login.steps.ts
 import { createBdd } from 'playwright-bdd';
 import { expect } from '@playwright/test';
-import { LoginPage } from '../../pages/login.page';
-import { InventoryPage } from '../../pages/inventory.page';
+import { test } from '../../fixtures/page-fixtures';
 
-const { Given, When, Then } = createBdd();
+const { Given, When, Then } = createBdd(test);
 
-Given('I am on the login page', async ({ page }) => {
-  const loginPage = new LoginPage(page);
+Given('I am on the login page', async ({ loginPage }) => {
   await loginPage.goto();
 });
 
-When('I log in with username {string} and password {string}', async ({ page }, username: string, password: string) => {
-  const loginPage = new LoginPage(page);
+When('I log in with username {string} and password {string}', async ({ loginPage }, username: string, password: string) => {
   await loginPage.login(username, password);
 });
 
-Then('I should see the products page', async ({ page }) => {
-  const inventoryPage = new InventoryPage(page);
+Then('I should see the products page', async ({ inventoryPage }) => {
   await expect(inventoryPage.productsTitle).toBeVisible();
 });
